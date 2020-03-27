@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "a881680c-f3d7-4360-a340-8c2bee89acde",
+		"name": "jsonplaceholder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://jsonplaceholder.typicode.com/posts/1?boo=query-test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "content-type-test",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "body-key-test",
+							"value": "body-value-test",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://jsonplaceholder.typicode.com/posts/1?param-key-test=pararm-value-test",
+					"protocol": "http",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"1"
+					],
+					"query": [
+						{
+							"key": "param-key-test",
+							"value": "pararm-value-test"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

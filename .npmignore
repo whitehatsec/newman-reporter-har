@@ -1,0 +1,9 @@
+node_modules
+
+*.tgz
+
+.vscode
+
+/out/
+/newman/
+/.temp/
