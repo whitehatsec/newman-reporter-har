@@ -1,6 +1,6 @@
 # newman-har-reporter
 
-A custom [newman](https://github.com/postmanlabs/newman) reporter that outputs a [HAR](https://en.wikipedia.org/wiki/HAR_(file_format)) file.
+A custom [postman](https://www.postman.com)/[newman](https://github.com/postmanlabs/newman) reporter that outputs a [HAR](https://en.wikipedia.org/wiki/HAR_(file_format)) file.
 
 ## Getting Started
 

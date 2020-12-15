@@ -11,6 +11,7 @@
     "url": "git+https://github.com/whitehatsec-innovations/newman-reporter-har.git"
   },
   "keywords": [
+    "postman",
     "newman",
     "newman-reporter",
     "har"
