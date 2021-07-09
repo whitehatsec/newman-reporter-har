@@ -29,6 +29,9 @@ function createRequest(aRequest) {
   });
 
   aRequest.headers.members.forEach((member) => {
+    if (member.hasOwnProperty("disabled") && member.disabled) {
+      return;
+    }
     request.addHeader(new HAR.Header({
       name: member.key,
       value: member.key === 'Content-Length' ? member.value.toString() : member.value
@@ -112,7 +115,8 @@ module.exports = function(newman, options) {
         path: options.export,
         content: JSON.stringify(createHar(data.summary), replacer, 2)
       });
-    } catch {
+    } catch (err) {
+      console.error(err);
       return;
     }
   })

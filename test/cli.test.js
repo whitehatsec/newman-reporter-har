@@ -44,7 +44,9 @@ describe('Newman CLI', () => {
 
   test('generate successful har', done => {
     exec(`${newman} run test/fixtures/jsonplaceholder-get-posts-1.postman_collection.json -r har --reporter-har-export ${outFile}`, code => {
-      fs.stat(outFile, done);
+      fs.stat(outFile, () => {
+        done();
+      });
       expect(code).toBeFalsy();
 
       var res;
@@ -59,8 +61,11 @@ describe('Newman CLI', () => {
           }
         })
       })
-      .then(JSON.parse)
-      .then(validate.har)
+      .then((data) => {
+        var obj = JSON.parse(data);
+        expect(obj.log.entries[0].request.headers.some(e => e['name'] === 'X-Extra')).toBeFalsy();
+        resolve(obj);
+      }).then(validate.har)
       .then(data => expect(data).toEqual(res))
       .catch(error => console.error);
     });

@@ -13,12 +13,14 @@ describe('Newman Library', () => {
         fs.existsSync(tempDir) && shell.rm('-rf', tempDir);
         fs.mkdirSync(tempDir);
 
+        var newmanPkg = shell.exec('npm pack ../node_modules/newman', { cwd: tempDir, silent: true }).stdout.trim();
         var reporterPkg = shell.exec('npm pack ../', { cwd: tempDir, silent: true }).stdout.trim();
+        shell.exec(`npm i --prefix . ${newmanPkg}`, { cwd: tempDir, silent: true });
         shell.exec(`npm i --prefix . ${reporterPkg}`, { cwd: tempDir, silent: true });
       }
     });
 
-    global.newman = require(path.join(__dirname, '..', 'node_modules', 'newman'));
+    global.newman = require(path.join(__dirname, '..', '.temp', 'node_modules', 'newman'));
 
     fs.stat('out', err => {
       if (err) {
@@ -49,7 +51,9 @@ describe('Newman Library', () => {
 
       expect(summary.collection.name).toEqual('jsonplaceholder');
       expect(summary.run.stats.iterations.total).toEqual(1);
-      fs.stat(outFile, done);
+      fs.stat(outFile, () => {
+        done();
+      });
     });
   });
 })
