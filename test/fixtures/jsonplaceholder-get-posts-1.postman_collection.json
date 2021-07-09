@@ -17,6 +17,12 @@
 						"key": "Content-Type",
 						"value": "content-type-test",
 						"type": "text"
+					},
+					{
+						"key": "X-Extra",
+						"value": "extra-value",
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"body": {
@@ -44,7 +50,8 @@
 					"query": [
 						{
 							"key": "param-key-test",
-							"value": "pararm-value-test"
+							"value": "pararm-value-test",
+							"disabled": false
 						}
 					]
 				}
