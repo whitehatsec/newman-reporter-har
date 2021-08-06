@@ -3,6 +3,8 @@ var HAR = require('har');
 const HAR_VERSION = 1.2;
 const MIME_TYPE = 'application/json; charset=utf-8';
 
+const executions = [];
+
 function getMimeType(members) {
   return members.filter((member) => {
     member.name === 'Content-Type';
@@ -81,7 +83,7 @@ function createHar(summary) {
     })
   });
 
-  summary.run.executions.forEach((execution) => {
+  executions.forEach((execution) => {
     log.addEntry(new HAR.Entry({
       startedDateTime: new Date().toISOString(),
       request: createRequest(execution.request),
@@ -105,6 +107,20 @@ function replacer(key, value) {
  * @returns {*}
  */
 module.exports = function(newman, options) {
+  newman.on('request', (err, data) => {
+    if (err) { return; }
+
+    try {
+      executions.push({
+        request: data.request,
+        response: data.response
+      })
+    } catch (err) {
+      console.error(err);
+      return;
+    }
+  });
+
   newman.on('beforeDone', function (err, data) {
     if (err) { return; }
 
@@ -118,11 +134,6 @@ module.exports = function(newman, options) {
     } catch (err) {
       console.error(err);
       return;
-    }
-  })
-  .on('request', function (err, summary) {
-    if (err) {
-      console.error(err);
     }
   });
 };
