@@ -135,10 +135,5 @@ module.exports = function(newman, options) {
       console.error(err);
       return;
     }
-  })
-  .on('request', function (err, summary) {
-    if (err) {
-      console.error(err);
-    }
   });
 };

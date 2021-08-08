@@ -4,9 +4,7 @@ const fs = require('fs'),
       validate = require('har-validator');
 const { exec } = require("child_process");
 
-// TODO: uncomment
-//describe('Newman CLI', () => {
-describe.skip('Newman CLI', () => {
+describe('Newman CLI', () => {
   const outFile = 'out/newman-report.har',
         newman = 'node ./.temp/node_modules/newman/bin/newman.js';
 
@@ -45,9 +43,7 @@ describe.skip('Newman CLI', () => {
   });
 
   test('generate successful har', done => {
-    // TODO: uncomment
-    //exec(`${newman} run test/fixtures/jsonplaceholder-get-posts-1.postman_collection.json -r har --reporter-har-export ${outFile}`, code => {
-    exec(`${newman} run test/fixtures/TiredfulAPI.postman_collection.json -r har --reporter-har-export ${outFile}`, code => {
+    exec(`${newman} run test/fixtures/jsonplaceholder-get-posts-1.postman_collection.json -r har --reporter-har-export ${outFile}`, code => {
       fs.stat(outFile, () => {
         done();
       });

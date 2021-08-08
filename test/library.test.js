@@ -33,30 +33,23 @@ describe('Newman Library', () => {
 
   afterEach(done => {
     fs.stat(outFile, err => {
-      return done();
-      /*
       if (err) {
         return done();
       }
 
       fs.unlink(outFile, done);
-      */
     });
   });
 
   test('generate successful har via newman library', done => {
     newman.run({
-      // TODO: uncomment
-      //collection: 'test/fixtures/jsonplaceholder-get-posts-1.postman_collection.json',
-      collection: 'test/fixtures/TiredfulAPI.postman_collection.json',
+      collection: 'test/fixtures/jsonplaceholder-get-posts-1.postman_collection.json',
       reporters: ['har'],
       reporter: { har: { export: outFile } }
     }, function (err, summary) {
       if (err) { return done(err); }
 
-      // TODO: uncomment
-      //expect(summary.collection.name).toEqual('jsonplaceholder');
-      expect(summary.collection.name).toEqual('Tiredful API');
+      expect(summary.collection.name).toEqual('jsonplaceholder');
       expect(summary.run.stats.iterations.total).toEqual(1);
       fs.stat(outFile, () => {
         done();
