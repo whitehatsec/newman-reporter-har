@@ -1,4 +1,5 @@
 var HAR = require('har');
+const { exec } = require('shelljs');
 
 const HAR_VERSION = 1.2;
 const MIME_TYPE = 'application/json; charset=utf-8';
@@ -85,7 +86,7 @@ function createHar(summary) {
 
   executions.forEach((execution) => {
     log.addEntry(new HAR.Entry({
-      startedDateTime: new Date().toISOString(),
+      startedDateTime: execution.startedDateTime,
       request: createRequest(execution.request),
       response: createResponse(execution.response)
     }));
@@ -112,11 +113,12 @@ module.exports = function(newman, options) {
 
     try {
       executions.push({
+        startedDateTime: new Date().toISOString(),
         request: data.request,
         response: data.response
       })
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
       return;
     }
   });
@@ -131,8 +133,8 @@ module.exports = function(newman, options) {
         path: options.export,
         content: JSON.stringify(createHar(data.summary), replacer, 2)
       });
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
       return;
     }
   });
