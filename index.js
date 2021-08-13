@@ -1,7 +1,10 @@
 var HAR = require('har');
+const { exec } = require('shelljs');
 
 const HAR_VERSION = 1.2;
 const MIME_TYPE = 'application/json; charset=utf-8';
+
+const executions = [];
 
 function getMimeType(members) {
   return members.filter((member) => {
@@ -81,9 +84,9 @@ function createHar(summary) {
     })
   });
 
-  summary.run.executions.forEach((execution) => {
+  executions.forEach((execution) => {
     log.addEntry(new HAR.Entry({
-      startedDateTime: new Date().toISOString(),
+      startedDateTime: execution.startedDateTime,
       request: createRequest(execution.request),
       response: createResponse(execution.response)
     }));
@@ -105,6 +108,21 @@ function replacer(key, value) {
  * @returns {*}
  */
 module.exports = function(newman, options) {
+  newman.on('request', (err, data) => {
+    if (err) { return; }
+
+    try {
+      executions.push({
+        startedDateTime: new Date().toISOString(),
+        request: data.request,
+        response: data.response
+      })
+    } catch (e) {
+      console.error(e);
+      return;
+    }
+  });
+
   newman.on('beforeDone', function (err, data) {
     if (err) { return; }
 
@@ -115,14 +133,9 @@ module.exports = function(newman, options) {
         path: options.export,
         content: JSON.stringify(createHar(data.summary), replacer, 2)
       });
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
       return;
-    }
-  })
-  .on('request', function (err, summary) {
-    if (err) {
-      console.error(err);
     }
   });
 };
