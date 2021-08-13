@@ -1,5 +1,4 @@
 var HAR = require('har');
-const { exec } = require('shelljs');
 
 const HAR_VERSION = 1.2;
 const MIME_TYPE = 'application/json; charset=utf-8';
