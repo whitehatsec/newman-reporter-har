@@ -87,7 +87,16 @@ function createHar(summary) {
     log.addEntry(new HAR.Entry({
       startedDateTime: execution.startedDateTime,
       request: createRequest(execution.request),
-      response: createResponse(execution.response)
+      response: createResponse(execution.response),
+      time: execution.response.responseTime,
+      timings: {
+        blocked : 0,
+        connect: 0,
+        dns: 0,
+        receive: 0,
+        send: 0,
+        wait: execution.response.responseTime
+      }
     }));
   });
 
