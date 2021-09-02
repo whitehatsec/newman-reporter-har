@@ -1,6 +1,6 @@
 {
   "name": "newman-reporter-har",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A custom Newman Reporter that outputs a HAR file",
   "main": "index.js",
   "scripts": {
