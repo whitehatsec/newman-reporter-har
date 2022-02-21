@@ -6,11 +6,12 @@ const MIME_TYPE = 'application/json; charset=utf-8';
 const executions = [];
 
 function getMimeType(members) {
-  return members.filter((member) => {
-    member.name === 'Content-Type';
-  }).map((member) => {
-    member.value;
-  })[0] || MIME_TYPE;
+  for (const m of members) {
+    if (m.key === 'Content-Type') {
+      return m.value
+    }
+  }
+  return MIME_TYPE;
 }
 
 function createRequest(aRequest) {
@@ -115,7 +116,7 @@ function replacer(key, value) {
  * @param {String} options.export - The path to which the summary object must be written.
  * @returns {*}
  */
-module.exports = function(newman, options) {
+module.exports = function (newman, options) {
   newman.on('request', (err, data) => {
     if (err) { return; }
 
