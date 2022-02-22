@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/whitehatsec-innovations/newman-reporter-har.git"
+    "url": "git+https://github.com/whitehatsec/newman-reporter-har.git"
   },
   "keywords": [
     "postman",
@@ -19,9 +19,9 @@
   "author": "WhiteHat Security",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/whitehatsec-innovations/newman-reporter-har/issues"
+    "url": "https://github.com/whitehatsec/newman-reporter-har/issues"
   },
-  "homepage": "https://github.com/whitehatsec-innovations/newman-reporter-har#readme",
+  "homepage": "https://github.com/whitehatsec/newman-reporter-har#readme",
   "dependencies": {
     "har": "^1.0.0",
     "har-validator": "^5.1.3",
