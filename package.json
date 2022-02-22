@@ -1,6 +1,6 @@
 {
   "name": "newman-reporter-har",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A custom Newman Reporter that outputs a HAR file",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "newman-reporter",
     "har"
   ],
-  "author": "Carlos Hung",
+  "author": "WhiteHat Security",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/whitehatsec-innovations/newman-reporter-har/issues"
